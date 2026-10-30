@@ -219,6 +219,213 @@
 })();
 </script>
 
+<!-- JOBSHIELD PROFESSIONAL APP START -->
+<style>
+#jobshield-app {
+  background: #0b1220;
+  color: #f5f7fb;
+  padding: 28px 18px;
+  border-radius: 18px;
+  max-width: 950px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
+#jobshield-app * { box-sizing: border-box; }
+#jobshield-app .js-brand {
+  color: #d7b56d;
+  font-size: 13px;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+#jobshield-app .js-panel {
+  background: #151f31;
+  border: 1px solid #293951;
+  border-radius: 17px;
+  padding: 25px;
+  margin: 15px 0;
+}
+#jobshield-app h2 { font-size: 29px; margin: 12px 0; }
+#jobshield-app p {
+  color: #bdc8d9;
+  line-height: 1.65;
+}
+#jobshield-app .js-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin: 12px 0;
+  border: 0;
+  border-radius: 10px;
+  background: #d7b56d;
+  color: #101827;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#jobshield-app .js-btn.secondary {
+  background: #263750;
+  color: white;
+}
+#jobshield-app .js-btn.danger {
+  background: #c83d4a;
+  color: white;
+}
+#jobshield-app .js-screen { display: none; }
+#jobshield-app .js-screen.active { display: block; }
+#jobshield-app .js-icon { font-size: 48px; margin-bottom: 12px; }
+#jobshield-app .js-green { color: #4cdda0; }
+#jobshield-app .js-red { color: #ff6571; }
+#jobshield-app .js-note {
+  font-size: 12px;
+  border-left: 3px solid #d7b56d;
+  padding: 10px 13px;
+  background: #202c40;
+  color: #c6d0df;
+  line-height: 1.6;
+}
+#jobshield-app .js-progress {
+  height: 8px;
+  background: #293951;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 25px 0;
+}
+#jobshield-app .js-progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #d7b56d;
+  transition: width 2s ease;
+}
+#jobshield-app .js-back {
+  background: transparent;
+  color: #d7b56d;
+  border: 0;
+  padding: 12px 0;
+  cursor: pointer;
+}
+#jobshield-app .js-result-detail {
+  padding: 13px 0;
+  border-bottom: 1px solid #344156;
+}
+@media(max-width:600px) {
+  #jobshield-app { padding: 16px 12px; }
+  #jobshield-app h2 { font-size: 24px; }
+  #jobshield-app .js-panel { padding: 19px; }
+}
+</style>
+
+<section id="jobshield-app">
+
+  <div class="js-panel">
+    <div class="js-brand">JOBSHIELD PAKISTAN</div>
+    <p style="margin-bottom:0">OVERSEAS EMPLOYMENT PROTECTION</p>
+  </div>
+
+  <div class="js-screen active" id="js-home">
+    <div class="js-panel">
+      <h2>Secure Your Journey.</h2>
+      <p>Verify your overseas job opportunity before you travel.</p>
+      <button class="js-btn" onclick="jsOpen('js-options')">Get Started →</button>
+      <div class="js-note">
+        Interactive sample experience. No connection to official government databases.
+      </div>
+    </div>
+  </div>
+
+  <div class="js-screen" id="js-options">
+    <div class="js-panel">
+      <h2>Verification Services</h2>
+      <p>Select a service to continue.</p>
+      <button class="js-btn" onclick="jsStart('visa')">
+        ◈ &nbsp; Visa & Job Offer Verification
+      </button>
+      <button class="js-btn secondary" onclick="jsStart('agent')">
+        ◉ &nbsp; Overseas Agent Verification
+      </button>
+      <button class="js-back" onclick="jsOpen('js-home')">← Back</button>
+    </div>
+  </div>
+
+  <div class="js-screen" id="js-loading">
+    <div class="js-panel" style="text-align:center">
+      <div class="js-icon">◈</div>
+      <h2>Analyzing Information</h2>
+      <p>Checking sample records and verification indicators.</p>
+      <div class="js-progress"><span id="js-bar"></span></div>
+      <p id="js-status">Initializing secure demo check...</p>
+      <div class="js-note">
+        MOFA, BEOE and FIA are reference points only. No official database is connected.
+      </div>
+    </div>
+  </div>
+
+  <div class="js-screen" id="js-safe">
+    <div class="js-panel">
+      <div class="js-icon js-green">✓</div>
+      <h2>Verified & Safe</h2>
+      <p>DEMO SAMPLE RESULT</p>
+      <div class="js-result-detail"><b>Company</b><br>XYZ Construction, Dubai</div>
+      <div class="js-result-detail"><b>Agent</b><br>Ahmed Recruitment Services</div>
+      <div class="js-result-detail"><b>Sample Status</b><br>Example record matched</div>
+      <p class="js-note">Fictional sample only. This is not a real verification or safety guarantee.</p>
+      <button class="js-btn" onclick="jsOpen('js-options')">New Verification</button>
+    </div>
+  </div>
+
+  <div class="js-screen" id="js-risk">
+    <div class="js-panel">
+      <div class="js-icon js-red">!</div>
+      <h2 class="js-red">High Risk Alert</h2>
+      <p>DEMO SAMPLE RESULT</p>
+      <div class="js-result-detail"><b>Risk indicator</b><br>Company details could not be verified in this demo.</div>
+      <div class="js-result-detail"><b>Recommended action</b><br>Seek independent confirmation before making payments or travelling.</div>
+      <p class="js-note">Fictional demo alert. It does not prove that any real company or agent is fraudulent.</p>
+      <button class="js-btn danger" onclick="jsOpen('js-report-info')">Report a Scam</button>
+      <button class="js-btn secondary" onclick="jsOpen('js-options')">Back to Services</button>
+    </div>
+  </div>
+
+  <div class="js-screen" id="js-report-info">
+    <div class="js-panel">
+      <h2>Report a Scam</h2>
+      <p>For a real complaint, use the official FIA complaint channels. JobShield does not submit reports.</p>
+      <button class="js-btn" onclick="window.open('https://complaint.fia.gov.pk/','_blank')">Open FIA Complaint Portal ↗</button>
+      <button class="js-back" onclick="jsOpen('js-options')">← Back to Services</button>
+    </div>
+  </div>
+
+</section>
+
+<script>
+function jsOpen(id) {
+  document.querySelectorAll('#jobshield-app .js-screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+}
+
+function jsStart(type) {
+  jsOpen('js-loading');
+  var bar = document.getElementById('js-bar');
+  var status = document.getElementById('js-status');
+  bar.style.width = '0%';
+  status.textContent = 'Initializing secure demo check...';
+
+  setTimeout(function() {
+    bar.style.width = '100%';
+    status.textContent = 'Reviewing sample verification indicators...';
+  }, 100);
+
+  setTimeout(function() {
+    // Alternate sample outcomes for demonstration only.
+    var result = Math.random() > 0.5 ? 'js-safe' : 'js-risk';
+    jsOpen(result);
+  }, 2300);
+}
+</script>
+<!-- JOBSHIELD PROFESSIONAL APP END -->
+
 </body>
   
 <!-- JOBSHIELD PROFESSIONAL APP START -->
