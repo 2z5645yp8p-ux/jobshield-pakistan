@@ -218,232 +218,214 @@
   updateProgress();
 })();
 </script>
-  <!-- JOBSHIELD VISAVERIFY DEMO START -->
+
+</body>
+  
+<!-- JOBSHIELD PROFESSIONAL APP START -->
 <style>
-#js-visa-demo {
-  background: #080d18;
-  color: #f4f7ff;
-  padding: 35px 18px;
-  font-family: Arial, sans-serif;
+#jobshield-app {
+  background: #0b1220;
+  color: #f5f7fb;
+  padding: 28px 18px;
   border-radius: 18px;
+  max-width: 950px;
   margin: 30px auto;
-  max-width: 1050px;
+  font-family: Arial, sans-serif;
 }
-#js-visa-demo * { box-sizing: border-box; }
-#js-visa-demo .js-card {
-  background: #121c2d;
-  border: 1px solid #293750;
-  border-radius: 15px;
-  padding: 22px;
+#jobshield-app * { box-sizing: border-box; }
+#jobshield-app .js-brand {
+  color: #d7b56d;
+  font-size: 13px;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+#jobshield-app .js-panel {
+  background: #151f31;
+  border: 1px solid #293951;
+  border-radius: 17px;
+  padding: 25px;
   margin: 15px 0;
 }
-#js-visa-demo h2 { font-size: 28px; margin-top: 0; }
-#js-visa-demo p { color: #bdc9dc; line-height: 1.6; }
-#js-visa-demo button, #js-visa-demo .js-upload {
-  display: inline-block;
-  background: #d6ad55;
-  color: #101522;
+#jobshield-app h2 { font-size: 29px; margin: 12px 0; }
+#jobshield-app p {
+  color: #bdc8d9;
+  line-height: 1.65;
+}
+#jobshield-app .js-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  margin: 12px 0;
   border: 0;
-  padding: 13px 19px;
-  border-radius: 9px;
+  border-radius: 10px;
+  background: #d7b56d;
+  color: #101827;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  margin: 6px 5px 6px 0;
 }
-#js-visa-demo button:hover { opacity: .88; }
-#js-visa-demo .js-secondary {
-  background: #263650;
+#jobshield-app .js-btn.secondary {
+  background: #263750;
   color: white;
 }
-#js-visa-demo .js-danger {
-  background: #c73542;
+#jobshield-app .js-btn.danger {
+  background: #c83d4a;
   color: white;
 }
-#js-visa-demo input, #js-visa-demo textarea {
-  width: 100%;
-  padding: 13px;
-  border-radius: 8px;
-  border: 1px solid #40516d;
-  background: #0b1423;
-  color: white;
-  margin: 8px 0 14px;
+#jobshield-app .js-screen { display: none; }
+#jobshield-app .js-screen.active { display: block; }
+#jobshield-app .js-icon { font-size: 48px; margin-bottom: 12px; }
+#jobshield-app .js-green { color: #4cdda0; }
+#jobshield-app .js-red { color: #ff6571; }
+#jobshield-app .js-note {
+  font-size: 12px;
+  border-left: 3px solid #d7b56d;
+  padding: 10px 13px;
+  background: #202c40;
+  color: #c6d0df;
+  line-height: 1.6;
 }
-#js-visa-demo .js-screen { display: none; }
-#js-visa-demo .js-screen.active { display: block; }
-#js-visa-demo .js-check { color: #4be09a; font-size: 55px; }
-#js-visa-demo .js-alert { color: #ff5967; font-size: 48px; }
-#js-visa-demo .js-progress {
-  height: 10px;
-  background: #293750;
+#jobshield-app .js-progress {
+  height: 8px;
+  background: #293951;
   border-radius: 20px;
   overflow: hidden;
-  margin: 20px 0;
+  margin: 25px 0;
 }
-#js-visa-demo .js-progress span {
+#jobshield-app .js-progress span {
   display: block;
-  width: 0;
   height: 100%;
-  background: #d6ad55;
-  transition: width 2s;
+  width: 0;
+  background: #d7b56d;
+  transition: width 2s ease;
 }
-#js-visa-demo .js-note {
-  border-left: 4px solid #d6ad55;
-  padding: 12px;
-  background: #1b2638;
-  font-size: 13px;
+#jobshield-app .js-back {
+  background: transparent;
+  color: #d7b56d;
+  border: 0;
+  padding: 12px 0;
+  cursor: pointer;
 }
-#js-visa-demo .js-hidden { display: none; }
+#jobshield-app .js-result-detail {
+  padding: 13px 0;
+  border-bottom: 1px solid #344156;
+}
+@media(max-width:600px) {
+  #jobshield-app { padding: 16px 12px; }
+  #jobshield-app h2 { font-size: 24px; }
+  #jobshield-app .js-panel { padding: 19px; }
+}
 </style>
 
-<section id="js-visa-demo">
-  <div class="js-card">
-    <p style="color:#d6ad55;font-weight:bold;letter-spacing:3px">JOBSHIELD PAKISTAN</p>
-    <h2>Visa & Overseas Job Verification</h2>
-    <p>Travel se pehle apni overseas job offer aur agent ke risk ko samajhne mein madad hasil karein.</p>
-    <div class="js-note">DEMO VERSION — Yeh sample experience hai. Official government databases se connection nahi hai.</div>
+<section id="jobshield-app">
+
+  <div class="js-panel">
+    <div class="js-brand">JOBSHIELD PAKISTAN</div>
+    <p style="margin-bottom:0">OVERSEAS EMPLOYMENT PROTECTION</p>
   </div>
 
-  <div class="js-screen active" id="js-welcome">
-    <div class="js-card">
-      <h2>Welcome to JobShield</h2>
-      <p>Choose your preferred language / Apni zubaan select karein.</p>
-      <button onclick="jsLanguage('en')">English</button>
-      <button class="js-secondary" onclick="jsLanguage('ur')">اردو 🇵🇰</button>
-      <p id="js-language-message">Protect your overseas employment journey.</p>
-      <button onclick="jsShow('js-services')">Get Started →</button>
+  <div class="js-screen active" id="js-home">
+    <div class="js-panel">
+      <h2>Secure Your Journey.</h2>
+      <p>Verify your overseas job opportunity before you travel.</p>
+      <button class="js-btn" onclick="jsOpen('js-options')">Get Started →</button>
+      <div class="js-note">
+        Interactive sample experience. No connection to official government databases.
+      </div>
     </div>
   </div>
 
-  <div class="js-screen" id="js-services">
-    <div class="js-card">
-      <h2>Scan & Verify</h2>
-      <p>Select the service you want to explore.</p>
-      <button onclick="jsShow('js-upload')">Upload / Scan Visa</button>
-      <button class="js-secondary" onclick="jsShow('js-agent')">Check Agent</button>
-      <button class="js-danger" onclick="jsShow('js-report')">Report a Scam</button>
+  <div class="js-screen" id="js-options">
+    <div class="js-panel">
+      <h2>Verification Services</h2>
+      <p>Select a service to continue.</p>
+      <button class="js-btn" onclick="jsStart('visa')">
+        ◈ &nbsp; Visa & Job Offer Verification
+      </button>
+      <button class="js-btn secondary" onclick="jsStart('agent')">
+        ◉ &nbsp; Overseas Agent Verification
+      </button>
+      <button class="js-back" onclick="jsOpen('js-home')">← Back</button>
     </div>
   </div>
 
-  <div class="js-screen" id="js-upload">
-    <div class="js-card">
-      <h2>Upload Visa / Job Offer</h2>
-      <p>Select a sample document to explore this demo. Your document is not uploaded to a verification server.</p>
-      <input type="file" id="js-file" accept=".pdf,.jpg,.jpeg,.png">
-      <button onclick="jsProcess()">Start Demo Check</button>
-      <button class="js-secondary" onclick="jsShow('js-services')">Back</button>
+  <div class="js-screen" id="js-loading">
+    <div class="js-panel" style="text-align:center">
+      <div class="js-icon">◈</div>
+      <h2>Analyzing Information</h2>
+      <p>Checking sample records and verification indicators.</p>
+      <div class="js-progress"><span id="js-bar"></span></div>
+      <p id="js-status">Initializing secure demo check...</p>
+      <div class="js-note">
+        MOFA, BEOE and FIA are reference points only. No official database is connected.
+      </div>
     </div>
   </div>
 
-  <div class="js-screen" id="js-agent">
-    <div class="js-card">
-      <h2>Check Overseas Agent</h2>
-      <label>Agent / Company Name</label>
-      <input id="js-agent-name" placeholder="Enter agent or company name">
-      <label>OEP Licence Number (optional)</label>
-      <input id="js-license" placeholder="Enter licence number">
-      <button onclick="jsProcess()">Check Sample Record</button>
-      <button class="js-secondary" onclick="jsShow('js-services')">Back</button>
-    </div>
-  </div>
-
-  <div class="js-screen" id="js-processing">
-    <div class="js-card">
-      <h2>Checking Sample Records...</h2>
-      <p>Exploring example verification steps and public authority reference points:</p>
-      <p>MOFA • BEOE • FIA</p>
-      <div class="js-progress"><span id="js-progress-bar"></span></div>
-      <p id="js-progress-text">Preparing demo check...</p>
-      <div class="js-note">Demo only — official databases se connection nahi hai.</div>
-    </div>
-  </div>
-
-  <div class="js-screen" id="js-verified">
-    <div class="js-card">
-      <div class="js-check">✓</div>
-      <h2>Verified & Safe — Demo</h2>
-      <p><b>Sample Company:</b> XYZ Construction, Dubai</p>
-      <p><b>Sample Agent:</b> Ahmed Recruitment Services</p>
-      <p><b>Sample Status:</b> Example record matched</p>
-      <div class="js-note">This is a fictional sample result, not a real company verification or safety guarantee.</div>
-      <button onclick="jsShow('js-services')">Back to Services</button>
+  <div class="js-screen" id="js-safe">
+    <div class="js-panel">
+      <div class="js-icon js-green">✓</div>
+      <h2>Verified & Safe</h2>
+      <p>DEMO SAMPLE RESULT</p>
+      <div class="js-result-detail"><b>Company</b><br>XYZ Construction, Dubai</div>
+      <div class="js-result-detail"><b>Agent</b><br>Ahmed Recruitment Services</div>
+      <div class="js-result-detail"><b>Sample Status</b><br>Example record matched</div>
+      <p class="js-note">Fictional sample only. This is not a real verification or safety guarantee.</p>
+      <button class="js-btn" onclick="jsOpen('js-options')">New Verification</button>
     </div>
   </div>
 
   <div class="js-screen" id="js-risk">
-    <div class="js-card">
-      <div class="js-alert">⚠</div>
-      <h2 style="color:#ff5967">HIGH RISK — DEMO</h2>
-      <p>Company details could not be verified in this demo.</p>
-      <p><b>Sample status:</b> Further investigation recommended.</p>
-      <div class="js-note">This is a fictional demo alert. It does not establish that a real company or agent is fraudulent.</div>
-      <button class="js-danger" onclick="jsShow('js-report')">Report This Agent to FIA</button>
-      <button class="js-secondary" onclick="jsShow('js-services')">Back to Services</button>
+    <div class="js-panel">
+      <div class="js-icon js-red">!</div>
+      <h2 class="js-red">High Risk Alert</h2>
+      <p>DEMO SAMPLE RESULT</p>
+      <div class="js-result-detail"><b>Risk indicator</b><br>Company details could not be verified in this demo.</div>
+      <div class="js-result-detail"><b>Recommended action</b><br>Seek independent confirmation before making payments or travelling.</div>
+      <p class="js-note">Fictional demo alert. It does not prove that any real company or agent is fraudulent.</p>
+      <button class="js-btn danger" onclick="jsOpen('js-report-info')">Report a Scam</button>
+      <button class="js-btn secondary" onclick="jsOpen('js-options')">Back to Services</button>
     </div>
   </div>
 
-  <div class="js-screen" id="js-report">
-    <div class="js-card">
+  <div class="js-screen" id="js-report-info">
+    <div class="js-panel">
       <h2>Report a Scam</h2>
-      <p>Prepare a local sample report. This demo does not submit anything to FIA.</p>
-      <input id="js-report-name" placeholder="Your name">
-      <input id="js-report-agent" placeholder="Agent / company name">
-      <textarea id="js-report-details" rows="4" placeholder="Describe the issue"></textarea>
-      <button onclick="jsPrepareReport()">Prepare Sample Report</button>
-      <p id="js-report-result"></p>
-      <button class="js-secondary" onclick="jsShow('js-services')">Back to Services</button>
+      <p>For a real complaint, use the official FIA complaint channels. JobShield does not submit reports.</p>
+      <button class="js-btn" onclick="window.open('https://complaint.fia.gov.pk/','_blank')">Open FIA Complaint Portal ↗</button>
+      <button class="js-back" onclick="jsOpen('js-options')">← Back to Services</button>
     </div>
   </div>
+
 </section>
 
 <script>
-function jsShow(id) {
-  document.querySelectorAll('#js-visa-demo .js-screen').forEach(function(screen) {
-    screen.classList.remove('active');
+function jsOpen(id) {
+  document.querySelectorAll('#jobshield-app .js-screen').forEach(function(s) {
+    s.classList.remove('active');
   });
-  var target = document.getElementById(id);
-  if (target) target.classList.add('active');
+  document.getElementById(id).classList.add('active');
 }
 
-function jsLanguage(language) {
-  document.getElementById('js-language-message').textContent =
-    language === 'ur'
-    ? 'Apne overseas job safar ko mehfooz banayein.'
-    : 'Protect your overseas employment journey.';
-}
-
-function jsProcess() {
-  jsShow('js-processing');
-  var bar = document.getElementById('js-progress-bar');
-  var text = document.getElementById('js-progress-text');
+function jsStart(type) {
+  jsOpen('js-loading');
+  var bar = document.getElementById('js-bar');
+  var status = document.getElementById('js-status');
   bar.style.width = '0%';
-  text.textContent = 'Preparing demo check...';
+  status.textContent = 'Initializing secure demo check...';
 
   setTimeout(function() {
     bar.style.width = '100%';
-    text.textContent = 'Sample check complete.';
+    status.textContent = 'Reviewing sample verification indicators...';
   }, 100);
 
   setTimeout(function() {
-    if (Math.random() > 0.5) {
-      jsShow('js-verified');
-    } else {
-      jsShow('js-risk');
-    }
+    // Alternate sample outcomes for demonstration only.
+    var result = Math.random() > 0.5 ? 'js-safe' : 'js-risk';
+    jsOpen(result);
   }, 2300);
 }
-
-function jsPrepareReport() {
-  var agent = document.getElementById('js-report-agent').value.trim();
-  if (!agent) {
-    document.getElementById('js-report-result').textContent =
-      'Please enter an agent or company name.';
-    return;
-  }
-  document.getElementById('js-report-result').textContent =
-    'Sample report prepared locally for: ' + agent +
-    '. It has NOT been submitted to FIA or any authority.';
-}
 </script>
-<!-- JOBSHIELD VISAVERIFY DEMO END -->
-</body>
+<!-- JOBSHIELD PROFESSIONAL APP END -->
+
 </html>
