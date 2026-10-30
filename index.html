@@ -62,6 +62,33 @@ section:target .section-head h2{animation:flash 1.4s ease}
 .hero h1{margin:18px 0}
 .layers-card{max-width:680px;margin:0 auto}
 @media(max-width:540px){.hero{padding-top:26px}}
+/* ===== panels ===== */
+[hidden]{display:none!important}
+body.lock{overflow:hidden}
+.overlay{position:fixed;inset:0;z-index:50;display:none;padding:14px;background:rgba(4,10,22,.8);backdrop-filter:blur(6px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.overlay.open{display:flex;animation:fadein .2s both}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.sheet{position:relative;width:min(700px,100%);margin:auto;background:linear-gradient(150deg,#12263f,#0b1a2e);border:1px solid #f4c45e45;border-radius:22px;padding:28px;box-shadow:var(--shadow);animation:rise .3s both}
+.sheet-close{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:#ffffff08;color:var(--white);cursor:pointer;font-size:1.5rem;line-height:1}
+.sheet-close:hover{border-color:var(--gold);color:var(--gold2)}
+.sheet h2{margin:8px 0 6px;font-size:clamp(1.4rem,3vw,1.8rem);letter-spacing:-.5px;padding-right:48px}
+.sheet .lead{color:var(--muted);margin:0 0 20px;font-size:.94rem}
+.cta-big{width:100%;min-height:56px;font-size:1.02rem}
+.outcome{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+@media(max-width:540px){.sheet{padding:22px 16px}.outcome{grid-template-columns:1fr}.overlay{padding:8px}}
+/* ===== hints banner ===== */
+.scan-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 22px;padding:16px 20px;border:1px solid #f4c45e45;border-radius:16px;background:linear-gradient(135deg,#f4c45e14,#f4c45e06)}
+.scan-banner div{display:flex;flex-direction:column;gap:2px;font-size:.9rem;color:var(--muted)}.scan-banner strong{color:var(--white);font-size:1rem}
+.vs-h{margin:26px 0 12px;font-size:1.05rem}
+/* ===== red-flag hints ===== */
+.scan-banner .scan-actions{flex-direction:row;flex-wrap:wrap;gap:10px}
+.hint-item{display:flex;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#ffffff04;margin-top:10px}
+.sev{flex:none;align-self:flex-start;font-size:.66rem;font-weight:900;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid}
+.sev-high .sev{background:#ff737322;color:var(--red);border-color:#ff737355}
+.sev-med .sev{background:#ff8a3d22;color:var(--orange);border-color:#ff8a3d55}
+.sev-low .sev{background:#8dbbff22;color:var(--blue);border-color:#8dbbff55}
+.hint-item strong{display:block;font-size:.9rem}.hint-item small{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+#hList{margin-top:6px}
 </style>
 </head>
 <body>
@@ -123,6 +150,7 @@ section:target .section-head h2{animation:flash 1.4s ease}
   <div class="wrap">
     <div class="section-head"><div class="kicker">Offer review workspace</div><h2>Review an overseas job offer</h2><p>Enter the details you have, then use the checklist to record which checks you personally completed. This page does not send your information to a server.</p>
       <ol class="howto"><li><b>1</b>Enter what you know</li><li><b>2</b>Confirm it on official sources</li><li><b>3</b>Tick only checks you completed</li></ol></div>
+    <div class="scan-banner"><div><strong>Unsure about a visa, job offer or agent?</strong><span>Get hints on warning signs. Nothing you enter leaves this page.</span></div><div class="scan-actions"><a class="btn btn-gold" href="#hints">Get red-flag hints</a></div></div>
     <div class="tool-grid">
       <div class="panel">
         <h3><span class="pbadge">1</span>Job & recruiter details</h3><p class="sub">Fill in any known information. Leave unknown fields blank.</p>
@@ -159,80 +187,6 @@ section:target .section-head h2{animation:flash 1.4s ease}
         </div>
         <div class="form-actions"><button class="btn btn-orange" id="copyBtn" type="button">Copy case summary</button><button class="btn btn-outline" id="downloadBtn" type="button">Download summary</button></div>
         <p class="hint">Never treat a completed checklist as a guarantee. A genuine recruiter can still provide a bad offer, and missing information alone is not proof of fraud.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="agent">
-  <div class="wrap">
-    <div class="section-head"><div class="kicker">Agent / OEP verification</div><h2>Check an overseas recruitment agent</h2><p>Note the details you were given, then compare them yourself with the official BEOE list of licensed OEPs. JobShield does not look up licence records and holds no licence data.</p></div>
-    <div class="tool-grid">
-      <div class="panel">
-        <h3><span class="pbadge">1</span>Agent details</h3><p class="sub">Enter what the agent gave you. Only the agency name and licence number are needed.</p>
-        <form id="agentForm">
-          <div class="form-grid">
-            <div class="field full"><label for="agName">Recruitment agency / OEP name</label><input id="agName" name="agName" placeholder="Name exactly as shown on the offer" autocomplete="off"></div>
-            <div class="field"><label for="agLicence">OEP licence number</label><input id="agLicence" name="agLicence" placeholder="Licence number given to you" autocomplete="off"></div>
-            <div class="field"><label for="agPerson">Agent name (optional)</label><input id="agPerson" name="agPerson" placeholder="Person you dealt with" autocomplete="off"></div>
-          </div>
-          <div class="link-row">
-            <a class="btn btn-gold" href="https://beoe.gov.pk/list-of-oeps" target="_blank" rel="noopener noreferrer">Open BEOE OEP list ↗</a>
-            <a class="btn btn-outline" href="https://beoe.gov.pk/" target="_blank" rel="noopener noreferrer">BEOE official site ↗</a>
-          </div>
-          <div class="form-actions"><button type="button" class="btn btn-outline" id="agFillBtn">Use details from offer form</button><button type="reset" class="btn btn-outline" id="agClearBtn">Clear</button></div>
-          <p class="hint">Privacy: details stay in this browser page. Do not enter passport numbers, CNIC numbers or passwords.</p>
-        </form>
-        <h3 style="margin-top:22px;font-size:1.02rem">How to compare</h3>
-        <ol class="steps-list">
-          <li><strong>Open the BEOE list yourself</strong> using the button above, not a link sent by the agent.</li>
-          <li><strong>Find the agency</strong> by name and compare the spelling, licence number and address.</li>
-          <li><strong>Check the status</strong> shown on the official record. Any mismatch, or no matching entry, means stop and ask BEOE before paying.</li>
-        </ol>
-      </div>
-      <div class="panel">
-        <h3><span class="pbadge">2</span>Manual verification checklist</h3><p class="sub">Tick only what you personally confirmed on the official source.</p>
-        <div class="result neutral" id="agResultBox" role="status" aria-live="polite">
-          <div class="result-top"><span class="status-dot"></span><div><div class="result-label">Current status</div><h4 id="agResultTitle">Not yet checked</h4></div></div>
-          <p id="agResultText">Enter the agency details, open the BEOE list and compare them. You must independently confirm every detail through BEOE.</p>
-        </div>
-        <div class="progress-wrap"><div class="progress-label"><span>Manual checks completed</span><strong id="agProgressText">0 of 5</strong></div><div class="progress" id="agProgress"><span id="agProgressBar"></span></div></div>
-        <div class="checks" id="agChecks">
-          <label class="check-item"><input type="checkbox" value="opened"><span><strong>Opened the official BEOE list myself</strong><small>Typed or opened from the official site, not a forwarded link.</small></span></label>
-          <label class="check-item"><input type="checkbox" value="name"><span><strong>Agency name matches the official record</strong><small>Spelling and address are the same, not just similar.</small></span></label>
-          <label class="check-item"><input type="checkbox" value="licence"><span><strong>Licence number matches that agency</strong><small>The number belongs to this agency, not to a different one.</small></span></label>
-          <label class="check-item"><input type="checkbox" value="status"><span><strong>Licence status is current on the official source</strong><small>Not suspended, cancelled or expired, as shown by BEOE.</small></span></label>
-          <label class="check-item"><input type="checkbox" value="contact"><span><strong>Contact details confirmed independently</strong><small>Phone and office address match the official record or were confirmed with BEOE.</small></span></label>
-        </div>
-        <div class="form-actions"><button class="btn btn-orange" id="agCopyBtn" type="button">Copy comparison notes</button></div>
-        <p class="hint">JobShield has not checked this agent. A genuine licence does not prove that a particular job offer is genuine.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="report">
-  <div class="wrap">
-    <div class="section-head"><div class="kicker">Report a scam</div><h2>Report through the official FIA portal</h2><p>If you suspect overseas job or visa fraud, file your complaint with the Federal Investigation Agency. Gather your evidence first so your report is clear and complete.</p></div>
-    <div class="tool-grid">
-      <div class="panel">
-        <h3><span class="pbadge">1</span>File your complaint</h3><p class="sub">Complaints are made on the official FIA website.</p>
-        <div class="link-row" style="margin-top:0"><a class="btn btn-orange" href="https://complaint.fia.gov.pk/" target="_blank" rel="noopener noreferrer">Open FIA complaint portal ↗</a></div>
-        <div class="callout"><strong>JobShield does not submit complaints on your behalf.</strong> Your complaint is filed and handled only through the official FIA portal. JobShield does not receive, forward or track it.</div>
-        <div class="callout warn"><strong>Protect your identity.</strong> Do not publish your CNIC, passport, bank account details or passwords on social media, in public groups or in this tool. Share them only through the official complaint channel if the form asks for them.</div>
-      </div>
-      <div class="panel">
-        <h3><span class="pbadge">2</span>Preserve your evidence</h3><p class="sub">Keep originals safe and make copies. Tick what you have gathered.</p>
-        <div class="progress-wrap"><div class="progress-label"><span>Evidence gathered</span><strong id="rpProgressText">0 of 6</strong></div><div class="progress" id="rpProgress"><span id="rpProgressBar"></span></div></div>
-        <div class="checks" id="rpChecks">
-          <label class="check-item"><input type="checkbox"><span><strong>Payment receipts and transfer slips</strong><small>Amounts, dates, and the name and account the money went to.</small></span></label>
-          <label class="check-item"><input type="checkbox"><span><strong>Messages and emails</strong><small>Screenshots showing dates, phone numbers and usernames.</small></span></label>
-          <label class="check-item"><input type="checkbox"><span><strong>Offer letter, contract or visa papers</strong><small>Every document you received, including photos of originals.</small></span></label>
-          <label class="check-item"><input type="checkbox"><span><strong>Agent and agency details</strong><small>Names, phone numbers, addresses, website and social media pages.</small></span></label>
-          <label class="check-item"><input type="checkbox"><span><strong>Licence or permission numbers they claimed</strong><small>Exactly as quoted to you, even if you think they are false.</small></span></label>
-          <label class="check-item"><input type="checkbox"><span><strong>Written timeline</strong><small>What was promised, what you paid and when, in order.</small></span></label>
-        </div>
-        <p class="hint" style="margin-top:14px">Do not delete chats or documents, even if the scammer asks you to. Stop further payments while you seek official advice.</p>
       </div>
     </div>
   </div>
@@ -283,6 +237,102 @@ section:target .section-head h2{animation:flash 1.4s ease}
       <div class="mini-check"><span class="round-icon">3</span><div><b>Employer and payment</b><small>Verify independently; be cautious of pressure or personal-account payments.</small></div></div>
     </aside></div></section>
 </main>
+<div class="overlay" id="agent" role="dialog" aria-modal="true" aria-labelledby="agentTitle">
+  <div class="sheet">
+    <button class="sheet-close" type="button" data-close aria-label="Close">×</button>
+    <div class="kicker">Agent / OEP check</div>
+    <h2 id="agentTitle">Check a licensed OEP</h2>
+    <p class="lead">Enter the details the agent gave you, then compare them with the official BEOE list. JobShield does not look up licence records.</p>
+    <form id="agentForm">
+      <div class="form-grid">
+        <div class="field full"><label for="agName">Recruitment agency / OEP name</label><input id="agName" name="agName" placeholder="Name exactly as shown on the offer" autocomplete="off"></div>
+        <div class="field"><label for="agLicence">OEP licence number</label><input id="agLicence" name="agLicence" placeholder="Licence number" autocomplete="off"></div>
+        <div class="field"><label for="agPerson">Agent name (optional)</label><input id="agPerson" name="agPerson" placeholder="Person you dealt with" autocomplete="off"></div>
+      </div>
+      <div class="link-row"><a class="btn btn-gold" href="https://beoe.gov.pk/list-of-oeps" target="_blank" rel="noopener noreferrer">Open official BEOE OEP list ↗</a><button type="reset" class="btn btn-outline" id="agClearBtn">Clear</button></div>
+    </form>
+    <ol class="steps-list" style="margin-top:18px">
+      <li><strong>Open the BEOE list</strong> with the button above.</li>
+      <li><strong>Find the agency</strong> and compare the name and licence number with what you entered.</li>
+      <li><strong>Tell us what you found</strong> below.</li>
+    </ol>
+    <div class="outcome"><button type="button" class="btn btn-outline" id="agMatchBtn">Details match</button><button type="button" class="btn btn-orange" id="agNoMatchBtn">No match / not found</button></div>
+    <div class="result neutral" id="agResultBox" role="status" aria-live="polite" style="margin:16px 0 0">
+      <div class="result-top"><span class="status-dot"></span><div><div class="result-label">Your comparison</div><h4 id="agResultTitle">Not yet compared</h4></div></div>
+      <p id="agResultText">Compare the details on the official BEOE list, then choose an option above. You must independently confirm the details through BEOE.</p>
+      <div class="link-row" id="agReportRow" hidden><button type="button" class="btn btn-orange" id="agToReport">Go to Report a Scam</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="report" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+  <div class="sheet">
+    <button class="sheet-close" type="button" data-close aria-label="Close">×</button>
+    <div class="kicker">Report a scam</div>
+    <h2 id="reportTitle">File a complaint with the FIA</h2>
+    <p class="lead">If you have been cheated, or suspect overseas job or visa fraud, file your complaint online on the official FIA portal.</p>
+    <a class="btn btn-orange cta-big" href="https://complaint.fia.gov.pk/" target="_blank" rel="noopener noreferrer">File Complaint on Official FIA Portal ↗</a>
+    <div class="callout"><strong>JobShield does not submit complaints on your behalf.</strong> Your complaint is filed and handled only through the official FIA portal.</div>
+    <h3 style="margin:22px 0 4px;font-size:1.05rem">Keep this ready before you file</h3>
+    <div class="progress-wrap" style="margin:10px 0"><div class="progress-label"><span>Evidence gathered</span><strong id="rpProgressText">0 of 6</strong></div><div class="progress" id="rpProgress"><span id="rpProgressBar"></span></div></div>
+    <div class="checks" id="rpChecks">
+      <label class="check-item"><input type="checkbox"><span><strong>Payment receipts and transfer slips</strong><small>Amounts, dates, and the name and account the money went to.</small></span></label>
+      <label class="check-item"><input type="checkbox"><span><strong>Messages and emails</strong><small>Screenshots showing dates, phone numbers and usernames.</small></span></label>
+      <label class="check-item"><input type="checkbox"><span><strong>Offer letter, contract or visa papers</strong><small>Every document you received.</small></span></label>
+      <label class="check-item"><input type="checkbox"><span><strong>Agent and agency details</strong><small>Names, phone numbers, addresses, website and social media pages.</small></span></label>
+      <label class="check-item"><input type="checkbox"><span><strong>Licence or permission numbers they claimed</strong><small>Exactly as quoted to you.</small></span></label>
+      <label class="check-item"><input type="checkbox"><span><strong>Written timeline</strong><small>What was promised, what you paid and when.</small></span></label>
+    </div>
+    <div class="callout warn"><strong>Protect your identity.</strong> Do not publish your CNIC, passport, bank details or passwords on social media or in public groups. Do not delete chats or documents, and stop further payments.</div>
+  </div>
+</div>
+
+<div class="overlay" id="hints" role="dialog" aria-modal="true" aria-labelledby="hTitle">
+  <div class="sheet">
+    <button class="sheet-close" type="button" data-close aria-label="Close">×</button>
+    <div class="kicker">Red-flag hints</div>
+    <h2 id="hTitle">Check the visa, job offer and agent for warning signs</h2>
+    <p class="lead">Fill in what you know. JobShield applies simple rules to what you type to spot mistakes, inconsistencies and common scam patterns. <strong style="color:var(--white)">It cannot tell you whether a visa or agent is real or fake.</strong> Nothing you enter leaves this page.</p>
+    <div class="form-actions" style="margin:0 0 6px"><button type="button" class="btn btn-outline" id="hPrefill">Fill from the offer form</button></div>
+    <form id="hintForm" novalidate>
+      <h3 class="vs-h">Visa</h3>
+      <div class="form-grid">
+        <div class="field full"><label for="hVisaType">Visa type written on the document</label><select id="hVisaType" name="visaType"><option value="">Not sure / no visa yet</option><option value="work">Work / employment visa</option><option value="visit">Visit / tourist visa</option><option value="business">Business visit visa</option><option value="family">Family visa</option><option value="umrah">Umrah / Hajj visa</option></select></div>
+        <div class="field"><label for="hIssue">Issue date</label><input id="hIssue" name="issue" type="date"></div>
+        <div class="field"><label for="hExpiry">Expiry date</label><input id="hExpiry" name="expiry" type="date"></div>
+        <div class="field full"><label for="hTravel">Planned travel date</label><input id="hTravel" name="travel" type="date"></div>
+      </div>
+      <h3 class="vs-h">Agent and permission</h3>
+      <div class="form-grid">
+        <div class="field"><label for="hLicence">Did the agent give an OEP licence number?</label><select id="hLicence" name="licence"><option value="">Select</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+        <div class="field"><label for="hBeoe">Compared with the BEOE list?</label><select id="hBeoe" name="beoe"><option value="">Select</option><option value="unchecked">Not checked yet</option><option value="match">Found, name and number match</option><option value="notfound">Not found, or does not match</option></select></div>
+        <div class="field full"><label for="hPermission">Job permission / demand number given?</label><select id="hPermission" name="permission"><option value="">Select</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+      </div>
+      <h3 class="vs-h">Payment</h3>
+      <div class="form-grid">
+        <div class="field"><label for="hPayWhen">When were you asked to pay?</label><select id="hPayWhen" name="payWhen"><option value="">Select</option><option value="none">Not asked to pay yet</option><option value="after">After the visa and contract were confirmed officially</option><option value="before">Before getting a visa or contract</option></select></div>
+        <div class="field"><label for="hPayMethod">How were you asked to pay?</label><select id="hPayMethod" name="payMethod"><option value="">Select</option><option value="bank">Bank transfer to the company account, with receipt</option><option value="cashrec">Cash, with an official receipt</option><option value="cashnorec">Cash, no receipt</option><option value="personal">To a person’s personal account</option><option value="wallet">Mobile wallet (Easypaisa, JazzCash, etc.)</option></select></div>
+      </div>
+      <h3 class="vs-h">Employer contact</h3>
+      <div class="form-grid">
+        <div class="field"><label for="hEmployer">Employer name</label><input id="hEmployer" name="employer" placeholder="Company named in the offer" autocomplete="off"></div>
+        <div class="field"><label for="hEmail">Employer email or website</label><input id="hEmail" name="email" placeholder="name@company.com" autocomplete="off"></div>
+      </div>
+      <h3 class="vs-h">Did any of these happen?</h3>
+      <div class="checks" id="hFlags"></div>
+      <h3 class="vs-h">Paste text from the offer or chat (optional)</h3>
+      <div class="field"><textarea id="hNotes" name="notes" placeholder="Copy messages or offer text here. JobShield looks for pressure, guarantees and unusual payment wording."></textarea><span class="hint">Do not paste passport numbers, CNIC numbers or passwords.</span></div>
+      <div class="form-actions"><button type="button" class="btn btn-gold" id="hRunBtn">Check for red flags</button><button type="reset" class="btn btn-outline" id="hClearBtn">Clear</button></div>
+    </form>
+    <div class="result neutral" id="hResultBox" role="status" aria-live="polite" hidden style="margin:18px 0 0">
+      <div class="result-top"><span class="status-dot"></span><div><div class="result-label">Based on what you entered</div><h4 id="hResultTitle"></h4></div></div>
+      <p id="hResultText"></p>
+      <div id="hList"></div>
+      <div class="link-row" id="hReportRow" hidden><button type="button" class="btn btn-orange" id="hToReport">Go to Report a Scam</button><button type="button" class="btn btn-outline" id="hToAgent">Check the agent</button></div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <div class="wrap footer-inner"><div><strong>JobShield Pakistan</strong><br>Verify Before You Trust.</div><div>Independent safety-information tool · Not a government service</div><div>© <span id="year"></span> JobShield Pakistan</div><p class="tiny" style="flex-basis:100%;margin:0">Demo version — JobShield does not currently connect to official government databases. All checks must be independently confirmed through the relevant official authorities.</p></div>
 </footer>
@@ -372,48 +422,37 @@ section:target .section-head h2{animation:flash 1.4s ease}
     document.querySelectorAll("#stages span").forEach((el,i)=>el.classList.toggle("on",i===(n===0?0:(n===checks.length?2:1))));
     progressBar.parentElement.classList.toggle("done",n===checks.length);
   }
-  function copyText(text,okMsg){
-    const fallback=()=>{const ta=document.createElement("textarea");ta.value=text;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
-      try{document.execCommand("copy");showToast(okMsg)}catch(err){showToast("Copy not available on this browser")}ta.remove()};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>showToast(okMsg),fallback)}else{fallback()}
+  /* ===== UPGRADE: Agent check and Report a Scam panels ===== */
+  const panels={agent:document.getElementById("agent"),report:document.getElementById("report"),hints:document.getElementById("hints")};
+  let lastFocus=null;
+  function openPanel(id){
+    const p=panels[id];if(!p)return;
+    Object.values(panels).forEach(o=>o.classList.remove("open"));
+    lastFocus=document.activeElement;p.classList.add("open");document.body.classList.add("lock");p.scrollTop=0;
+    const c=p.querySelector(".sheet-close");if(c)c.focus();
   }
+  function closePanels(){
+    Object.values(panels).forEach(o=>o.classList.remove("open"));document.body.classList.remove("lock");
+    hClear();
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  document.addEventListener("click",e=>{
+    const a=e.target.closest('a[href="#agent"],a[href="#report"],a[href="#hints"]');
+    if(a){e.preventDefault();openPanel(a.getAttribute("href").slice(1));return}
+    if(e.target.closest("[data-close]")||(e.target.classList&&e.target.classList.contains("overlay")))closePanels();
+  });
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanels()});
+  if(location.hash==="#agent"||location.hash==="#report")openPanel(location.hash.slice(1));
+
   const agForm=document.getElementById("agentForm");
-  const agChecks=[...document.querySelectorAll('#agChecks input[type="checkbox"]')];
-  const agBox=document.getElementById("agResultBox"),agTitle=document.getElementById("agResultTitle"),agText=document.getElementById("agResultText");
-  function agValues(){return Object.fromEntries(new FormData(agForm).entries())}
-  function agUpdate(){
-    const v=agValues(),n=agChecks.filter(c=>c.checked).length,entered=(v.agName||"").trim()||(v.agLicence||"").trim();
-    document.getElementById("agProgressText").textContent=n+" of "+agChecks.length;
-    document.getElementById("agProgressBar").style.width=(n/agChecks.length*100)+"%";
-    document.getElementById("agProgress").classList.toggle("done",n===agChecks.length);
-    agBox.className="result";
-    if(n===agChecks.length){
-      agBox.classList.add("good");agTitle.textContent="Manual checks marked complete";
-      agText.textContent="You marked every check complete. JobShield has not verified this agent. Keep a note or screenshot of what you saw on the official BEOE source and confirm any doubts directly with BEOE.";
-    }else if(n>0||entered){
-      agBox.classList.add("warning");agTitle.textContent="Manual check in progress";
-      agText.textContent="Compare the details on the official BEOE list and tick each check you complete. You must independently confirm the agency name and licence details through BEOE before paying or sharing documents.";
-    }else{
-      agBox.classList.add("neutral");agTitle.textContent="Not yet checked";
-      agText.textContent="Enter the agency details, open the BEOE list and compare them. You must independently confirm every detail through BEOE.";
-    }
-  }
-  agForm.addEventListener("input",agUpdate);
-  agChecks.forEach(c=>c.addEventListener("change",agUpdate));
-  agForm.addEventListener("reset",()=>setTimeout(agUpdate,0));
-  document.getElementById("agFillBtn").addEventListener("click",()=>{
-    document.getElementById("agName").value=document.getElementById("agency").value;
-    document.getElementById("agLicence").value=document.getElementById("licence").value;
-    agUpdate();showToast("Details copied from the job offer form");
-  });
-  document.getElementById("agCopyBtn").addEventListener("click",()=>{
-    const v=agValues(),lines=["JOBSHIELD PAKISTAN — AGENT / OEP COMPARISON NOTES","Generated: "+new Date().toLocaleString(),"",
-      "DISCLAIMER: These are user-entered notes, not a government verification. Confirm all details through BEOE: https://beoe.gov.pk/list-of-oeps","",
-      "Agency / OEP name: "+(v.agName||"Not provided"),"OEP licence number: "+(v.agLicence||"Not provided"),"Agent name: "+(v.agPerson||"Not provided"),"",
-      "MANUAL CHECKS ("+agChecks.filter(c=>c.checked).length+" of "+agChecks.length+" marked complete)"];
-    agChecks.forEach(c=>lines.push((c.checked?"[x] ":"[ ] ")+c.parentElement.querySelector("strong").textContent));
-    copyText(lines.join("\n"),"Comparison notes copied");
-  });
+  const agBox=document.getElementById("agResultBox"),agTitle=document.getElementById("agResultTitle"),agText=document.getElementById("agResultText"),agRow=document.getElementById("agReportRow");
+  function agShow(cls,title,text,showReport){agBox.className="result "+cls;agTitle.textContent=title;agText.textContent=text;agRow.hidden=!showReport}
+  agForm.addEventListener("submit",e=>e.preventDefault());
+  agForm.addEventListener("reset",()=>setTimeout(()=>agShow("neutral","Not yet compared","Compare the details on the official BEOE list, then choose an option above. You must independently confirm the details through BEOE.",false),0));
+  document.getElementById("agMatchBtn").addEventListener("click",()=>agShow("good","Details match, by your own comparison","You reported that the name and licence number match the official BEOE record. JobShield has not verified this. A genuine licence does not prove a particular job offer is genuine, so also confirm the job permission and never pay without an official receipt.",false));
+  document.getElementById("agNoMatchBtn").addEventListener("click",()=>agShow("bad","Do not pay yet","If the name or licence number does not match, or the agency is not listed, do not pay or share documents. Confirm directly with BEOE. If you believe you are being scammed, you can report it to the FIA.",true));
+  document.getElementById("agToReport").addEventListener("click",()=>openPanel("report"));
+
   const rpChecks=[...document.querySelectorAll('#rpChecks input[type="checkbox"]')];
   function rpUpdate(){
     const n=rpChecks.filter(c=>c.checked).length;
@@ -422,8 +461,110 @@ section:target .section-head h2{animation:flash 1.4s ease}
     document.getElementById("rpProgress").classList.toggle("done",n===rpChecks.length);
   }
   rpChecks.forEach(c=>c.addEventListener("change",rpUpdate));
+  /* ===== UPGRADE: red-flag hints (rule-based, runs only in this browser) ===== */
+  const hFlagDefs=[
+    {s:"high",t:"Told to travel on a visit visa and “change it to a work visa later”",w:"This is a common trick. A visit visa does not give you the right to work."},
+    {s:"high",t:"No written contract, or the terms differ from what was promised",w:"Salary, duties and hours should be in writing and match what you were told."},
+    {s:"high",t:"Agent refuses to let you verify with BEOE or the Protector",w:"A genuine agent has nothing to hide. Refusing or discouraging checks is a serious warning."},
+    {s:"high",t:"Agent says BEOE registration or the Protector is not needed",w:"Skipping official procedures leaves you without protection and may be illegal."},
+    {s:"high",t:"Employer or job title is different in different documents",w:"Names, roles and countries should match across the offer, permission and visa."},
+    {s:"med",t:"Visa or job is “guaranteed”, “100%” or needs no interview",w:"Genuine recruiters cannot guarantee a visa, because the final decision is made by the authorities."},
+    {s:"med",t:"Pressure to pay quickly (“last seats”, “today only”)",w:"Urgency is used to stop you from checking. A real offer survives a day of verification."},
+    {s:"med",t:"Offer came only through WhatsApp or social media, with no office visited",w:"Visit the licensed office and confirm that it exists at the address on the BEOE record."},
+    {s:"med",t:"Salary is unusually high, or no experience or skills are needed",w:"Offers that look too good for the role are a classic bait."},
+    {s:"med",t:"Asked for passport or CNIC copies before any contract",w:"Share identity documents only after confirming the agent and the offer through official sources."}
+  ];
+  (function(){const box=document.getElementById("hFlags");hFlagDefs.forEach((d,i)=>{const l=document.createElement("label");l.className="check-item";const c=document.createElement("input");c.type="checkbox";c.value=String(i);const sp=document.createElement("span");const st=document.createElement("strong");st.textContent=d.t;sp.appendChild(st);l.appendChild(c);l.appendChild(sp);box.appendChild(l)})})();
+  function hAnalyze(d,today){
+    const out=[];const add=(s,t,w)=>out.push({s:s,t:t,w:w});
+    const day=v=>v?new Date(v+"T00:00:00"):null;
+    const bad=["visit","business","family","umrah"];
+    if(bad.indexOf(d.visaType)>=0)add("high","The visa is not a work visa","A job offer should come with a work or employment visa. Visit, business, family and Umrah visas do not give the right to work.");
+    const is=day(d.issue),ex=day(d.expiry),tr=day(d.travel);
+    if(is&&ex&&is>ex)add("high","Issue date is after the expiry date","A genuine visa cannot expire before it is issued. Treat this document with great caution.");
+    if(ex&&ex<today)add("high","The visa has already expired","An expired visa cannot be used to travel.");
+    if(is&&is>today)add("med","The issue date is in the future","A visa cannot be issued on a date that has not arrived yet. Check the date on the document.");
+    if(tr&&is&&tr<is)add("high","Travel date is before the issue date","You cannot travel on a visa before it is issued.");
+    if(tr&&ex&&tr>ex)add("high","Travel date is after the expiry date","The visa would already have expired on your planned travel date.");
+    if(d.licence==="no")add("high","The agent gave no OEP licence number","Licensed OEPs have a licence number that can be looked up on the official BEOE list.");
+    if(d.beoe==="notfound")add("high","Agent not found on the BEOE list, or details do not match","Do not pay or hand over documents until BEOE confirms the agency.");
+    else if(d.beoe==="unchecked")add("med","The agent has not been compared with the BEOE list yet","Use Check Agent and compare the name and licence number first.");
+    if(d.permission==="no")add("med","No job permission or demand number was given","Ask for the permission details and confirm them with BEOE or the Protector of Emigrants.");
+    if(d.payWhen==="before")add("high","Payment was asked before a visa or contract","Paying before anything is confirmed is the most common way people lose money.");
+    if(d.payMethod==="cashnorec")add("high","Payment in cash with no receipt","Without a receipt you have no proof of payment. Always ask for an official receipt.");
+    if(d.payMethod==="personal")add("high","Payment to a personal account","Licensed agencies receive money into the company’s account, not a person’s.");
+    if(d.payMethod==="wallet")add("med","Payment through a mobile wallet","Mobile wallets are hard to trace. Confirm the account belongs to the licensed agency.");
+    const free=["gmail.com","yahoo.com","hotmail.com","outlook.com","live.com","icloud.com","aol.com","proton.me","protonmail.com","yandex.com","mail.com","gmx.com"];
+    let dom=(d.email||"").trim().toLowerCase();
+    if(dom){
+      dom=dom.indexOf("@")>=0?dom.split("@").pop():dom.replace(/^https?:\/\//,"").replace(/^www\./,"").split("/")[0];
+      dom=dom.replace(/[\s>]/g,"");
+      if(free.indexOf(dom)>=0)add("med","The employer uses a free email address","Established companies usually have their own email domain. Confirm the employer through contact details you find yourself.");
+      else if(/\.(xyz|top|click|work|loan)$/.test(dom))add("low","The employer’s web address ends in an unusual extension","This is not proof of anything, but check the company independently.");
+      const skip=["company","trading","contracting","group","limited","ltd","llc","construction","services","establishment","corporation","international","general","est","the","and"];
+      const toks=(d.employer||"").toLowerCase().split(/[^a-z0-9]+/).filter(x=>x.length>=4&&skip.indexOf(x)<0);
+      const flat=dom.replace(/[^a-z0-9]/g,"");
+      if(toks.length&&free.indexOf(dom)<0&&!toks.some(x=>flat.indexOf(x)>=0))add("low","The web address does not visibly match the employer name","Check that the company really owns this website.");
+    }
+    (d.flags||[]).forEach(i=>{const f=hFlagDefs[i];if(f)add(f.s,f.t,f.w)});
+    const n=d.notes||"";
+    const rules=[
+      [/guarantee|100\s*%|no interview|without interview|ضمانت/i,"med","The text promises a guaranteed visa or job","Real recruiters cannot guarantee a visa."],
+      [/urgent|hurry|last chance|limited seats|today only|jaldi|فوری/i,"med","The text uses pressure wording","Urgency is used to stop you from checking."],
+      [/advance|pay first|pehle paisa|token money|deposit/i,"med","The text asks for money in advance","Do not pay before the agent and the offer are confirmed."],
+      [/easypaisa|jazzcash|western union|usdt|crypto|bitcoin|personal account/i,"med","An unusual payment channel is mentioned","Use traceable payment to the licensed agency’s own account, with a receipt."],
+      [/free visa|فری ویزا/i,"med","“Free visa” wording appears","This term is often linked to unsponsored or irregular arrangements."]
+    ];
+    rules.forEach(r=>{if(r[0].test(n))add(r[1],r[2],r[3])});
+    if(/visit visa|tourist visa|visitor visa|business visa/i.test(n)&&bad.indexOf(d.visaType)<0)add("high","The text mentions a visit, tourist or business visa","If this is a job offer, that visa type does not allow you to work.");
+    return out;
+  }
+  function hData(){
+    const g=id=>document.getElementById(id).value;
+    return {visaType:g("hVisaType"),issue:g("hIssue"),expiry:g("hExpiry"),travel:g("hTravel"),licence:g("hLicence"),beoe:g("hBeoe"),permission:g("hPermission"),payWhen:g("hPayWhen"),payMethod:g("hPayMethod"),employer:g("hEmployer"),email:g("hEmail"),notes:g("hNotes"),
+      flags:[...document.querySelectorAll("#hFlags input:checked")].map(c=>Number(c.value))};
+  }
+  function hClear(){
+    document.getElementById("hintForm").reset();
+    document.getElementById("hResultBox").hidden=true;document.getElementById("hReportRow").hidden=true;document.getElementById("hList").textContent="";
+  }
+  document.getElementById("hClearBtn").addEventListener("click",()=>setTimeout(()=>{document.getElementById("hResultBox").hidden=true},0));
+  document.getElementById("hPrefill").addEventListener("click",()=>{
+    const v=id=>document.getElementById(id).value.trim();
+    if(v("employer"))document.getElementById("hEmployer").value=v("employer");
+    if(v("website"))document.getElementById("hEmail").value=v("website");
+    document.getElementById("hLicence").value=v("licence")?"yes":document.getElementById("hLicence").value;
+    document.getElementById("hPermission").value=v("permission")?"yes":document.getElementById("hPermission").value;
+    const t=[v("payment"),v("notes")].filter(Boolean).join("\n");if(t)document.getElementById("hNotes").value=t;
+    showToast("Details copied from the offer form");
+  });
+  document.getElementById("hRunBtn").addEventListener("click",()=>{
+    const d=hData(),box=document.getElementById("hResultBox"),list=document.getElementById("hList");
+    const touched=d.visaType||d.issue||d.expiry||d.travel||d.licence||d.beoe||d.permission||d.payWhen||d.payMethod||d.employer.trim()||d.email.trim()||d.notes.trim()||d.flags.length;
+    list.textContent="";
+    if(!touched){box.className="result neutral";document.getElementById("hResultTitle").textContent="Nothing to check yet";document.getElementById("hResultText").textContent="Fill in what you know, then check again.";document.getElementById("hReportRow").hidden=true;box.hidden=false;return}
+    const f=hAnalyze(d,new Date(new Date().toDateString()));
+    const hi=f.filter(x=>x.s==="high").length,me=f.filter(x=>x.s==="med").length;
+    let cls,title,text;
+    if(hi>=2){cls="bad";title="High risk: several serious warning signs";text="Do not pay, share documents or travel until the agent and the visa are confirmed through BEOE and the issuing country’s official portal."}
+    else if(hi===1){cls="bad";title="Serious warning sign found";text="Resolve this before you pay or travel, and confirm the agent and visa through official sources."}
+    else if(me>0||f.length>0){cls="warning";title="Some concerns to resolve";text="None of these proves fraud, but each one should be cleared up with official sources before you pay."}
+    else{cls="neutral";title="No warning signs found by these rules";text="This is not proof that anything is genuine. Fake documents can look perfect, so still verify the agent on BEOE and the visa on the issuing country’s portal."}
+    box.className="result "+cls;document.getElementById("hResultTitle").textContent=title;
+    document.getElementById("hResultText").textContent=text+" JobShield cannot declare a visa or agent real or fake.";
+    const order={high:0,med:1,low:2},lbl={high:"High",med:"Medium",low:"Low"};
+    f.sort((a,b)=>order[a.s]-order[b.s]).forEach(x=>{
+      const r=document.createElement("div");r.className="hint-item sev-"+x.s;
+      const s=document.createElement("span");s.className="sev";s.textContent=lbl[x.s];
+      const w=document.createElement("div");const st=document.createElement("strong");st.textContent=x.t;const sm=document.createElement("small");sm.textContent=x.w;
+      w.appendChild(st);w.appendChild(sm);r.appendChild(s);r.appendChild(w);list.appendChild(r);
+    });
+    document.getElementById("hReportRow").hidden=hi===0;box.hidden=false;box.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+  document.getElementById("hToReport").addEventListener("click",()=>openPanel("report"));
+  document.getElementById("hToAgent").addEventListener("click",()=>openPanel("agent"));
   updateProgress();
-  agUpdate();rpUpdate();
+  rpUpdate();
 })();
 </script>
 
